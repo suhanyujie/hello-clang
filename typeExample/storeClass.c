@@ -2,16 +2,31 @@
 
 void func1();
 
+// 测试这个例子：`gcc -m32 -o a.out typeExample/storeClass.c typeExample/storeClass2.c&& ./a.out`
+extern void testExern();
+int iData2 = 2019;
+static int iData1 = 0;
+
 int main(int argc, char const *argv[])
 {
-    func1();
+    int a1 = 0;
+    while (a1 < 5)
+    {
+        func1();
+        a1++;
+    }
+    testExern();
+
     return 0;
 }
 
-void func1(){
-    printf("%s", "hello world");
+void func1()
+{
+    // 在多次调用`func1`时，`static`修饰的变量`i1`只初始化一次
+    static int i1 = 1;
+    i1++;
+    printf("the result is : %d\n", i1);
 }
-
 
 /*
 ## 存储类
@@ -34,5 +49,9 @@ void func1(){
 * static 修饰符也可以应用于全局变量。当 static 修饰全局变量时，会使变量的作用域限制在声明它的文件内。
 * 全局声明的一个 static 变量或方法可以被任何函数或方法调用，只要这些方法出现在跟 static 变量或方法同一个文件中。
 
+### extern
+* extern 存储类用于提供一个全局变量的引用，全局变量对所有的程序文件都是可见的。当您使用 'extern' 时，对于无法初始化的变量，会把变量名指向一个之前定义过的存储位置。
+* 当您有多个文件且定义了一个可以在其他文件中使用的全局变量或函数时，可以在其他文件中使用 extern 来得到已定义的变量或函数的引用。
+* 也就是说，`extern`修饰符通常用于当有两个或多个文件共享相同的全局变量或函数的时候
 
 */
