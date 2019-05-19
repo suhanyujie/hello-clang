@@ -27,7 +27,7 @@ int main(int argc, char const *argv[])
 
     // 数组参数传递
     int arr2[3] = {21,89,54};
-    print_average(arr1, 3);
+    print_average(arr2, 3);
 
     return 0;
 }
@@ -37,13 +37,14 @@ void print_average(int arr[],int size)
 {
     float average = 0;
     int sum = 0;
-    for (size_t i = 0; i < size; i++)
+    printf("%d\n", sum);
+    for (int i = 0; i < size; i++)
     {
         sum += arr[i];
+        printf("%d\n", arr[i]);
     }
     average = (float)sum/size;
     printf("sum is %d,the result is %.2f\n", sum,average);
-    
 }
 
 /*
