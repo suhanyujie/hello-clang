@@ -13,21 +13,30 @@ void initArray2()
 }
 
 void print_average(int arr[],int size);
+int* getRandom();
 
 int main(int argc, char const *argv[])
 {
     // 数组初始化
-    initArray2();
-    int arr1[10];
-    float fArr1[] = {1.0, 2.0, 3.0};
-    // printf("%d\n", arr1);
-    printf("%.2f\n", fArr1[0]);
-    fArr1[2] = 3.14;
-    printf("%.2f\n", fArr1[2]);
+    // initArray2();
+    // int arr1[10];
+    // float fArr1[] = {1.0, 2.0, 3.0};
+    // // printf("%d\n", arr1);
+    // printf("%.2f\n", fArr1[0]);
+    // fArr1[2] = 3.14;
+    // printf("%.2f\n", fArr1[2]);
 
-    // 数组参数传递
-    int arr2[3] = {21,89,54};
-    print_average(arr2, 3);
+    // // 数组参数传递
+    // int arr2[3] = {21,89,54};
+    // print_average(arr2, 3);
+
+    // 函数返回数组
+    int* res = getRandom();
+    for (size_t i = 0; i < 10; i++)
+    {
+        printf("the res is : %d\n", res[i]);
+    }
+    
 
     return 0;
 }
@@ -46,6 +55,24 @@ void print_average(int arr[],int size)
     average = (float)sum/size;
     printf("sum is %d,the result is %.2f\n", sum,average);
 }
+
+// 要生成返回随机数的函数
+int* getRandom()
+{
+    static int r[10];
+    int i;
+    printf("the timestamp is:%d\n", time(NULL));
+    // 给定随机数种子，使用当前时间戳作为种子
+    srand((unsigned)time(NULL));
+    for (i = 0; i < 10; i++)
+    {
+        r[i] = rand();
+        printf("the num is: %d\n", r[i]);
+    }
+    
+    return r;
+}
+
 
 /*
 ## 数组
@@ -112,8 +139,29 @@ void myFunction(int param[]){}
 * 值得注意的是，对函数而言，数组的长度是无关紧要的，因为'C语言'不会对形式参数执行边界检查。
 
 ### 从函数返回数组
+* c 语言允许从函数返回数组，但它是有条件的：C 语言不允许返回一个完整的数组作为函数的参数。但是，您可以通过指定不带索引的数组名来返回一个指向数组的指针。
+* 可以查看示例：
+
+```c
+int* getRandom()
+{
+    static int r[10];
+    int i;
+    printf("the timestamp is:%d\n", time(NULL));
+    // 给定随机数种子，使用当前时间戳作为种子
+    srand((unsigned)time(NULL));
+    for (i = 0; i < 10; i++)
+    {
+        r[i] = rand();
+        printf("the num is: %d\n", r[i]);
+    }
+    
+    return r;
+}
+```
 
 ### 返回数组的指针
+* 
 
 ## 参考资料
 * http://www.runoob.com/cprogramming/c-arrays.html
