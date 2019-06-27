@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 
 // 初始化二维数组
 void initArray2()
@@ -11,9 +12,25 @@ void initArray2()
     };
     printf("size is:%lu\n", sizeof(numArr)); // 48  12个数，每个数是4字节
 }
+/**
+ * 以下一部分是函数声明
+ */ 
 
 void print_average(int arr[],int size);
+// 获取随机数
 int* getRandom();
+void getFirstAddr();
+void getFirstAddrPlus();
+void getSizeOfPoint();
+
+// 声明数组
+void arrDeclaration () {
+    int arr[10] = {11,12,85,14,76};
+    for (size_t i = 0; i < 10; i++)
+    {
+        printf("%d\n", arr[i]);
+    }
+}
 
 int main(int argc, char const *argv[])
 {
@@ -31,12 +48,17 @@ int main(int argc, char const *argv[])
     // print_average(arr2, 3);
 
     // 函数返回数组
-    int* res = getRandom();
-    for (size_t i = 0; i < 10; i++)
-    {
-        printf("the res is : %d\n", res[i]);
-    }
+    // int* res = getRandom();
+    // for (size_t i = 0; i < 10; i++)
+    // {
+    //     printf("the res is : %d\n", res[i]);
+    // }
     
+    // arrDeclaration();
+
+    // getFirstAddr();
+    // getFirstAddrPlus();
+    getSizeOfPoint();
 
     return 0;
 }
@@ -61,7 +83,8 @@ int* getRandom()
 {
     static int r[10];
     int i;
-    printf("the timestamp is:%d\n", time(NULL));
+    // time 返回的类型是 time_t，应该使用 %ld 作为 format 的占位符
+    printf("the timestamp is:%ld\n", time(NULL));
     // 给定随机数种子，使用当前时间戳作为种子
     srand((unsigned)time(NULL));
     for (i = 0; i < 10; i++)
@@ -71,6 +94,38 @@ int* getRandom()
     }
     
     return r;
+}
+
+void getFirstAddr()
+{
+    int arr[10] = {1,2,3,4};
+    int* p1 = arr;
+    printf("%d\n", *p1);// 打印的是 arr 的第一个元素的值
+    printf("%p\n", p1);
+    return;
+}
+
+void getFirstAddrPlus()
+{
+    int arr[10] = {1,2,3,4};
+    int* p1 = arr;
+    // printf("%p\n", p1);
+    p1++;
+    printf("%d\n", *p1);
+    // printf("%p\n", p1);
+    return;
+}
+
+void getSizeOfPoint()
+{
+    int arr[10] = {1,2,3,4};
+    int* p1 = arr;
+    double* d1;
+    // 32 位 CPU 下，指针大小是 4 字节，可以通过：`gcc -m32 -o a.out typeExample/array.c && ./a.out` 查看
+    // 64 位 CPU 下，指针大小是 8 字节，可以通过：`gcc -m64 -o a.out typeExample/array.c && ./a.out` 查看
+    printf("*int -> %lu\n", sizeof(p1));
+    printf("*double-> %lu\n", sizeof(d1));
+    return;
 }
 
 
@@ -160,8 +215,32 @@ int* getRandom()
 }
 ```
 
-### 返回数组的指针
-* 
+### 指向数组的指针
+* 在 c 语言中，一个数组的数组名代表该数组的起始地址
+
+```c
+int arr[10] = {1,2,3,4};
+```
+
+* 如上面的代码，arr 就是指向 &arr[0] 的指针。因此，将其赋值，被赋值的变量可以取出对应的值 —— 1
+* 还可以对指针进行加减运算，如 `p1++`，它的意义是指向下一个位置的地址：
+
+```c
+void getFirstAddrPlus()
+{
+    int arr[10] = {1,2,3,4};
+    int* p1 = arr;
+    // printf("%p\n", p1);
+    p1++;
+    printf("%d\n", *p1);
+    // printf("%p\n", p1);
+    return;
+}
+```
+
+* 此时，打印的值是 arr 的第二个元素的值 —— 2
+
+
 
 ## 参考资料
 * http://www.runoob.com/cprogramming/c-arrays.html
