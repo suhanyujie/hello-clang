@@ -3,11 +3,14 @@
 
 void pointerDeclare();
 void pointerDeclare2();
+void testPointerOfFunc();
+int testPointerOfFunc_ie1(int i, int j);
 
 int main(int argc, char const *argv[])
 {
     // pointerDeclare();
-    pointerDeclare2();
+    // pointerDeclare2();
+    testPointerOfFunc();
     return 0;
 }
 
@@ -29,12 +32,25 @@ void pointerDeclare2()
     pi1 = &num1;
 
     printf("addr is:%p\n", pi1);
-    printf("addr is:%p\n", ++pi1);
+    printf("addr after +1 is:%p\n", ++pi1);
     int *pi2;
     pi2 = pi1;
     // 指针的减法
-    printf("%p - %p = %d", ++pi1, pi2, (pi1 - pi2));
+    printf("%p - %p = %d\n", ++pi1, pi2, (pi1 - pi2));// 差值为 1，这里的 1 表示 1 个单位指针
 }
+
+int testPointerOfFunc_ie1(int i, int j)
+{
+    return i + j;
+}
+void testPointerOfFunc()
+{
+    int (*p)(int, int) = &testPointerOfFunc_ie1;
+    int res = p(2, 3);
+    printf("res is %d\n", res);
+}
+
+
 
 /*
 ## 指针
@@ -80,9 +96,28 @@ void pointerDeclare2()
 }
 ```
 
-* 在 32 位的整数中，pi1 指针递增一次后，相当于数值增加 4。也就是增加一次，它都将指向下一个整数位置，即当前位置往后移 4 个字节。
+* 在 **32 位**的整数中，pi1 指针递增一次后，相当于数值增加 4。也就是增加一次，它都将指向下一个整数位置，即当前位置往后移 4 个字节。
 
+## 函数指针
+* 我们知道，指针变量是指指向某个变量的指针。那么所谓“函数指针”，就是指向函数的指针了。在实际使用中，我们可以通过指针来实现对函数的调用。
 
+### 函数指针的声明
+* 声明原型如下：`typedef int (*fun_ptr)(int,int);`,（声明一个指向同样参数、返回值的函数指针类型），下方是一个简单示例：
+
+```c
+int testPointerOfFunc_ie1(int i, int j)
+{
+    return i + j;
+}
+void testPointerOfFunc()
+{
+    int (*p)(int, int) = &testPointerOfFunc_ie1;
+    int res = p(2, 3);
+    printf("res is %d\n", res);
+}
+```
+
+* 声明函数指针时，要声明好对应的返回值，参数等类型：`int (*p)(int, int)`
 
 
 
