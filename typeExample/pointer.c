@@ -5,12 +5,17 @@ void pointerDeclare();
 void pointerDeclare2();
 void testPointerOfFunc();
 int testPointerOfFunc_ie1(int i, int j);
+void populate_array(int *array, size_t arrSize, int (*p)(void));
+int getNextRandomValue(void);
 
 int main(int argc, char const *argv[])
 {
     // pointerDeclare();
     // pointerDeclare2();
-    testPointerOfFunc();
+    // testPointerOfFunc();
+    // 回调函数示例
+    int arr[10];
+    populate_array(arr, 10, &getNextRandomValue);
     return 0;
 }
 
@@ -50,7 +55,20 @@ void testPointerOfFunc()
     printf("res is %d\n", res);
 }
 
+// 回调函数
+void populate_array(int *array, size_t arraySize, int (*getNextValue)(void))
+{
+    for (size_t i = 0; i < arraySize; i++)
+    {
+        array[i] = getNextValue();
+        printf("the %zuth number is: %d\n", i, array[i]);
+    }
+}
 
+int getNextRandomValue(void)
+{
+    return rand();
+}
 
 /*
 ## 指针
@@ -117,9 +135,24 @@ void testPointerOfFunc()
 }
 ```
 
-* 声明函数指针时，要声明好对应的返回值，参数等类型：`int (*p)(int, int)`
+* 声明函数指针时，要声明好对应的返回值，参数等类型：`int (*p)(int, int)`，其中一开始的 `int` 是指返回值；后面的 `(int, int)` 则是参数类型 `int`
 
+### 回调函数
+* 很多语言中都用“回调函数”的概念，如：JavaScript、PHP等，那么回调函数在底层的 c 是如何实现的呢？下面我们先从介绍回调函数的功能开始。
+* 回调函数就是一个通过函数指针调用的函数。例如上方代码示例：
 
+```c
+void populate_array(int *array, size_t arraySize, int (*getNextValue)(void))
+{
+    for (size_t i = 0; i < arraySize; i++)
+    {
+        array[i] = getNextValue();
+        printf("the %zuth number is: %d\n", i, array[i]);
+    }
+}
+```
+
+* 调用方式是 `populate_array(arr, 10, &getNextRandomValue);`。而 `&getNextRandomValue` 则是对应的函数指针。
 
 
 */
