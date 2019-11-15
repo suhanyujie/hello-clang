@@ -9,12 +9,16 @@
 */
 void string_declearation();
 void example_strcpy();
+void example_strcat();
+void example_strcmp();
 
 int main(int argc, char const *argv[])
 {
     printf("initial: hello world!\n");
     // string_declearation();
-    example_strcpy();
+    // example_strcpy();
+    example_strcat();
+    example_strcmp();
 
 
     return 0;
@@ -48,6 +52,28 @@ void example_strcpy()
     printf("%s\n", str1);
     strcpy(str1, str2);
     printf("%s\n", str1);
+}
+
+// strcat 示例
+void example_strcat()
+{
+    char str1[20] = "who";
+    char str2[4] = "are";
+    char str3[4] = "you";
+    strcat(str1, str2);
+    strcat(str1, str3);
+    printf("%s\n", str1);
+}
+
+// strcmps 示例
+// strcmp 参考 https://www.runoob.com/cprogramming/c-function-strcmp.html
+// 如果返回值 < 0，则表示 str1 小于 str2 ；如果返回值 > 0，则表示 str2 小于 str1。
+void example_strcmp()
+{
+    char str1[10] = "hELlo";
+    char str2[10] = "hello";
+    int res = strcmp(str1, str2);
+    printf("the results is:%d\n", res);
 }
 
 
