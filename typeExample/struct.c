@@ -16,7 +16,8 @@ int main(int argc, char const *argv[])
     printf("initial print:hello world!\n");
     // example_struct();
     // example_struct2();
-    example_struct3();
+    // example_struct3();
+    example_struct_include_struct();
 
     return 0;
 }
@@ -73,7 +74,11 @@ void example_struct_include_struct()
         struct Node *prev;
         struct Node *next;
         int data;
-    };
+    }Node;
+
+    Node* n1;
+    Node* n2;
+    Node root = {n1, n2, 1};
 }
 
 
