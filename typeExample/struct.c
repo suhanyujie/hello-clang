@@ -7,13 +7,17 @@
  -----------------
 */
 void example_struct();
-
-
+void example_struct2();
+void example_struct3();
+void example_struct_include_struct();
 
 int main(int argc, char const *argv[])
 {
     printf("initial print:hello world!\n");
-    example_struct();
+    // example_struct();
+    // example_struct2();
+    example_struct3();
+
     return 0;
 }
 
@@ -33,6 +37,46 @@ void example_struct()
 
     printf("title:%s\n author: %s\n price: %.2f\n", book.title, book.author, book.price);
 }
+
+// 使用类型别名作为类型声明变量
+void example_struct2()
+{
+    typedef struct Books
+    {
+        char title[50];
+        char author[20];
+        float price;
+    } Book;
+
+    Book book = {"《细说PHP》", "高洛峰", 45.98};
+    printf("title:%s\n author: %s\n price: %.2f\n", book.title, book.author, book.price);
+}
+
+// 使用结构体名称方式声明变量
+void example_struct3()
+{
+    struct Books
+    {
+        char title[50];
+        char author[20];
+        float price;
+    };
+    struct Books book = {"《深入浅出Nodejs》", "佚名", 35.98};
+    printf("title:%s\n author: %s\n price: %.2f\n", book.title, book.author, book.price);
+}
+
+// 结构体中含有结构体
+void example_struct_include_struct()
+{
+    typedef struct Node
+    {
+        struct Node *prev;
+        struct Node *next;
+        int data;
+    };
+}
+
+
 
 /*
  -----------------
@@ -70,6 +114,42 @@ void example_struct()
         float price;
     } book = {"PHP源码剖析", "秦朋", 86.4};
 
+    printf("title:%s\n author: %s\n price: %.2f\n", book.title, book.author, book.price);
+}
+```
+
+### 结构体变量的声明
+#### 通过别名进行结构体变量声明
+* 通过 `typedef` 定义结构体别名，通过别名进行变量声明。
+
+```c
+void example_struct2()
+{
+    typedef struct Books
+    {
+        char title[50];
+        char author[20];
+        float price;
+    } Book;
+
+    Book book = {"《细说PHP》", "高洛峰", 45.98};
+    printf("title:%s\n author: %s\n price: %.2f\n", book.title, book.author, book.price);
+}
+```
+
+#### 直接通过结构体名称进行变量声明
+* 可以直接通过结构体名称进行新的类型变量声明，但这种方式要繁琐一些，需要加上关键字 `struct`
+
+```c
+void example_struct3()
+{
+    struct Books
+    {
+        char title[50];
+        char author[20];
+        float price;
+    };
+    struct Books book = {"《深入浅出Nodejs》", "佚名", 35.98};
     printf("title:%s\n author: %s\n price: %.2f\n", book.title, book.author, book.price);
 }
 ```
