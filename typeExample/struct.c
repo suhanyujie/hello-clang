@@ -10,6 +10,9 @@ void example_struct();
 void example_struct2();
 void example_struct3();
 void example_struct_include_struct();
+void example_include_with_eachother();
+void example_struct_initial_1();
+void example_struct_initial_2();
 
 int main(int argc, char const *argv[])
 {
@@ -17,7 +20,10 @@ int main(int argc, char const *argv[])
     // example_struct();
     // example_struct2();
     // example_struct3();
-    example_struct_include_struct();
+    // example_struct_include_struct();
+    // example_include_with_eachother();
+    // example_struct_initial_1();
+    example_struct_initial_2();
 
     return 0;
 }
@@ -81,6 +87,53 @@ void example_struct_include_struct()
     Node root = {n1, n2, 1};
 }
 
+// 结构体互相包含的情况
+void example_include_with_eachother()
+{
+    // 此时需要对其中一个结构体进行**不完整声明**
+    struct B;
+
+    struct A
+    {
+        struct B *b1;
+    };
+    
+    struct B
+    {
+        struct A *a1;
+    };
+}
+
+// 结构体变量的初始化 1
+void example_struct_initial_1()
+{
+    struct Books
+    {
+        char title[50];
+        char author[20];
+        float price;
+    } book = {"PHP源码剖析", "秦朋", 86.4};
+
+    printf("title:%s\n author: %s\n price: %.2f\n", book.title, book.author, book.price);
+}
+
+// 结构体变量的初始化 2
+// 可以声明好结构体变量后，逐个地对结构体成员赋值
+void example_struct_initial_2()
+{
+    typedef struct Books
+    {
+        char title[50];
+        char author[20];
+        float price;
+    } Book;
+    // Book b1 = {"<低风险创业>", "佚名", 36.8};
+    Book *b1 = (Book*)malloc(sizeof(Book));
+    // b1->title = "<低风险创业>";
+    // b1->author = "佚名";
+    // b1->price = 36.8;
+    // printf("%s\n", b1->title);
+}
 
 
 /*
