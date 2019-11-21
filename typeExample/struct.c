@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /*
  -----------------
@@ -129,10 +130,12 @@ void example_struct_initial_2()
     } Book;
     // Book b1 = {"<低风险创业>", "佚名", 36.8};
     Book *b1 = (Book*)malloc(sizeof(Book));
-    // b1->title = "<低风险创业>";
-    // b1->author = "佚名";
-    // b1->price = 36.8;
-    // printf("%s\n", b1->title);
+    strcpy(b1->title, "<低风险创业>");
+    strcpy(b1->author, "佚名");
+    b1->price = 36.8;
+    printf("%s\n", b1->title);
+    printf("%s\n", b1->author);
+    printf("%.2f\n", b1->price);
 }
 
 
