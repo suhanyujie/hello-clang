@@ -14,6 +14,7 @@ void example_struct_include_struct();
 void example_include_with_eachother();
 void example_struct_initial_1();
 void example_struct_initial_2();
+void example_struct_pointer();
 
 int main(int argc, char const *argv[])
 {
@@ -24,7 +25,8 @@ int main(int argc, char const *argv[])
     // example_struct_include_struct();
     // example_include_with_eachother();
     // example_struct_initial_1();
-    example_struct_initial_2();
+    // example_struct_initial_2();
+    example_struct_pointer();
 
     return 0;
 }
@@ -138,6 +140,23 @@ void example_struct_initial_2()
     printf("%.2f\n", b1->price);
 }
 
+void example_struct_pointer()
+{
+    typedef struct Book {
+        char title[50];
+        char author[30];
+    } book;
+
+    book b1;
+    strcpy(b1.title, "细说PHP");
+    strcpy(b1.author, "高洛峰");
+    book *p_b1;
+    p_b1 = &b1;
+
+    printf("title is:%s\n", b1.title);
+    printf("title is:%s\n", (*p_b1).title);
+    printf("title is:%s\n", p_b1->title);
+}
 
 /*
  -----------------
@@ -214,6 +233,31 @@ void example_struct3()
     printf("title:%s\n author: %s\n price: %.2f\n", book.title, book.author, book.price);
 }
 ```
+
+### 指向结构体的指针
+* 结构体变量的指针和其他类型变量的指针的声明是类似的 `struct Books *p_b1;`，如下示例：
+
+```c
+void example_struct_pointer()
+{
+    typedef struct Book {
+        char title[50];
+        char author[30];
+    } book;
+
+    book b1;
+    strcpy(b1.title, "细说PHP");
+    strcpy(b1.author, "高洛峰");
+    book *p_b1;
+    p_b1 = &b1;
+
+    printf("title is:%s\n", b1.title);
+    printf("title is:%s\n", (*p_b1).title);
+    printf("title is:%s\n", p_b1->title);
+}
+```
+
+### 位域
 
 
 */
