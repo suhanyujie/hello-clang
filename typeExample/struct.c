@@ -15,6 +15,7 @@ void example_include_with_eachother();
 void example_struct_initial_1();
 void example_struct_initial_2();
 void example_struct_pointer();
+void example_bit_field();
 
 int main(int argc, char const *argv[])
 {
@@ -26,7 +27,8 @@ int main(int argc, char const *argv[])
     // example_include_with_eachother();
     // example_struct_initial_1();
     // example_struct_initial_2();
-    example_struct_pointer();
+    // example_struct_pointer();
+    example_bit_field();
 
     return 0;
 }
@@ -158,6 +160,19 @@ void example_struct_pointer()
     printf("title is:%s\n", p_b1->title);
 }
 
+// 位域示例
+void example_bit_field()
+{
+    struct bs {
+        int a:2;
+        int b:2;
+        int  :4;
+    }data;
+    data.a = 1;
+    data.b = 0;
+    printf("%d-%d\n", data.a, data.b);
+}
+
 /*
  -----------------
  | 笔记区
@@ -258,6 +273,63 @@ void example_struct_pointer()
 ```
 
 ### 位域
+* 当一些数据无需占用一个完整的字节时，可以通过”位域“的方式来存储。
+* 位域定义和结构体定义类似，形式如下：
+
+```c
+struct 位域结构名
+{
+    位域列表
+};
+```
+
+* 其中位域项形式为：`类型说明符 位域名: 位域长度`。示例如下：
+
+```c
+struct bs {
+    int a: 8;
+    int b: 2;
+    int c: 6;
+}data;
+```
+
+* 一个位域存储在一个字节中，如果一个字节所剩坑建不够存放另一个位域时，则会从下一个单元存放该位域。如下：
+
+```c
+struct bs {
+    unsigned a:4;
+    unsigned  :4;// 空域
+    unsigned b:4;
+    unsigned c:4;
+}
+```
+
+* 上方的位域 `bs` 中，`a` 占第一个字节的 4 位，后 4 位用 0 占位不使用，b 从第二字节开始占用 4 位，c 也占用 4 位.
+* 位域**不允许**跨越**2个字节**，因此，位域的长度不能大于一个字节的长度。一些编译器可能会允许域的内存重叠，另外一些编译器可能会把大于一个域的部分存储在下一个字节中。
+* 位域中，可以存在**无名域**。
+
+```c
+struct bs {
+    int a:4;
+    int  :4;//该 4 位不能使用 
+}
+```
+
+* 综上，位域在本质上就是一种数据结构，不过其成员是按二进位分配的。
+
+### 位域的使用
+* 位域的使用和结构体成员的使用类似，其形式一般为：
+
+```c
+位域变量名.位域名
+位域变量名->位域名
+```
+
+* 示例如下：
+
+```c
+
+```
 
 
 */
