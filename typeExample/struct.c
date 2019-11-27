@@ -165,12 +165,17 @@ void example_bit_field()
 {
     struct bs {
         int a:2;
-        int b:2;
-        int  :4;
-    }data;
+        int b:3;
+        int  :3;
+    }data, *pbit;
+    // 赋值时，不能超过该位域的允许范围！
+    // a 为 2 位，其中一位是符号位，所以它只能表示-1~1的数
     data.a = 1;
     data.b = 0;
-    printf("%d-%d\n", data.a, data.b);
+    data.b = 3;
+    printf("%d - %d\n", data.a, data.b);
+    pbit = &data;
+    printf("the *pbit value is:%d - %d\n", (*pbit).a, (*pbit).b);
 }
 
 /*
