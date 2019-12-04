@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /*
  -----------------
@@ -7,12 +8,14 @@
  -----------------
 */
 void example_print_1();
+void example_print_for_putchar();
 
 
 int main(int argc, char const *argv[])
 {
     printf("initial print:hello world!\n");
-    example_print_1();
+    //example_print_1();
+    example_print_for_putchar();
 
     return 0;
 }
@@ -26,6 +29,18 @@ int main(int argc, char const *argv[])
 void example_print_1()
 {
     printf("c language learning...\n");
+}
+
+void example_print_for_putchar()
+{
+    char str[20] = "hello...\0";
+    int len = strlen(str);
+    for (int i = 0; i < len; i++)
+    {
+        putchar(str[i]);
+        printf("\t%c\n", str[i]);
+    }
+    printf("%s, string length is:%d\n", str, len);
 }
 
 /*
@@ -51,6 +66,12 @@ void example_print_1()
 }
 ```
 
+#### putchar 函数
+* 输出除了 printf 以外，还有 putchar。该函数把字符输出到屏幕上，并返回相同的字符。需要注意的是，它在同一个时间内只会输出一个单一的字符。
+
+
+### 输入
+#### getchar 函数
 
 
 */
