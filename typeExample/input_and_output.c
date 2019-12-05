@@ -9,13 +9,15 @@
 */
 void example_print_1();
 void example_print_for_putchar();
+void example_print_for_getchar();
 
 
 int main(int argc, char const *argv[])
 {
     printf("initial print:hello world!\n");
     //example_print_1();
-    example_print_for_putchar();
+    //example_print_for_putchar();
+    example_print_for_getchar();
 
     return 0;
 }
@@ -43,6 +45,14 @@ void example_print_for_putchar()
     printf("%s, string length is:%d\n", str, len);
 }
 
+void example_print_for_getchar()
+{
+    int c1;
+    printf("please enter a value：\n");
+    c1 = getchar();
+    printf("You entered value is：%d\n", c1);
+}
+
 /*
  -----------------
  | 笔记区
@@ -68,10 +78,11 @@ void example_print_1()
 
 #### putchar 函数
 * 输出除了 printf 以外，还有 putchar。该函数把字符输出到屏幕上，并返回相同的字符。需要注意的是，它在同一个时间内只会输出一个单一的字符。
-
+* 与之对应的是 `getchar`
 
 ### 输入
 #### getchar 函数
+* `int getchar(void)` 函数从屏幕读取下一个可用的字符，并把它返回为一个整数(ASCII码值)。这个函数在同一个时间内只会读取一个单一的字符。您可以在循环内使用这个方法，以便从屏幕上读取多个字符。
 
 
 */
