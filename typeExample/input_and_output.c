@@ -11,6 +11,7 @@ void example_print_1();
 void example_print_for_putchar();
 void example_print_for_getchar();
 void example_print_for_puts_and_gets();
+void example_print_for_scanf_and_printf();
 
 
 int main(int argc, char const *argv[])
@@ -19,7 +20,8 @@ int main(int argc, char const *argv[])
     //example_print_1();
     //example_print_for_putchar();
     //example_print_for_getchar();
-    example_print_for_puts_and_gets();
+    //example_print_for_puts_and_gets();
+    example_print_for_scanf_and_printf();
 
     return 0;
 }
@@ -62,6 +64,16 @@ void example_print_for_puts_and_gets()
     gets(str);
     printf("the value is:\n");
     puts(str);
+}
+
+// 使用 scanf 和 printf 进行输入输出
+void example_print_for_scanf_and_printf()
+{
+    char str[100];
+    int i = 0;
+    printf("please enter a value:\n");
+    scanf("%s", str);
+    printf("the value is:%s\n", str);
 }
 
 
@@ -111,8 +123,24 @@ void example_print_for_getchar()
 * `puts` 函数把字符串 s 和一个尾随的换行符写入到 stdout 中。
 * 注意：在使用 `gets` 的时候，编译器会提示 `warning: this program uses gets(), which is unsafe.`
 
+#### scanf 和 printf 函数
+* `int scanf(const char *format, ...)` 函数从标准输入流 stdin 读取输入，并根据提供的 format 来浏览输入。
+* `int printf(const char *format, ...)` 函数把输出写入到标准输出流 stdout ，并根据提供的格式产生输出。 
+* 其中 format 参数，可以是一个简单的常量字符串，但是您可以分别指定 `%s`、`%d`、`%c`、`%f` 等来输出或读取字符串、整数、字符或浮点数。
+* 示例如下：
 
+```c
+// 使用 scanf 和 printf 进行输入输出
+void example_print_for_scanf_and_printf()
+{
+    char str[100];
+    int i = 0;
+    printf("please enter a value:\n");
+    scanf("%s", str);
+    printf("the value is:%s\n", str);
+}
+```
 
-
+* 需要注意的是  scanf 函数在读取输入时，遇到空格就会停止！因此上方示例程序**无法**输出 `this is a value`，因为其中包含空格。
 
 */
