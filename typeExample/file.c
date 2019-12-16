@@ -15,7 +15,8 @@ int main(int argc, char const *argv[])
 {
     printf("initial print:hello world!\n");
     //example_fopen();
-    example_fputc();
+    //example_fputc();
+    example_fputs();
     return 0;
 }
 
@@ -42,9 +43,14 @@ void example_fputc()
     fclose(f1);
 }
 
+// 通过 fputs 向文件中写入字符串
 void example_fputs()
 {
-
+     char str[20];
+    FILE *f1 = fopen("./tmp_data.txt", "a");
+    char c1 = fputs("this is a string\n", f1);
+    printf("%c\n", c1);
+    fclose(f1);
 }
 
 /*
@@ -105,9 +111,17 @@ void example_fputc()
     printf("%c\n", c1);
     fclose(f1);
 }
+
+// 通过 fputs 向文件中写入字符串
+void example_fputs()
+{
+     char str[20];
+    FILE *f1 = fopen("./tmp_data.txt", "a");
+    char c1 = fputs("this is a string\n", f1);
+    printf("%c\n", c1);
+    fclose(f1);
+}
 ```
-
-
 
 ### 读取文件
 
