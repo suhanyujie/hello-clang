@@ -9,6 +9,7 @@
 void example_fopen();
 void example_fputc();
 void example_fputs();
+void example_read_file();
 
 
 int main(int argc, char const *argv[])
@@ -16,7 +17,8 @@ int main(int argc, char const *argv[])
     printf("initial print:hello world!\n");
     //example_fopen();
     //example_fputc();
-    example_fputs();
+    //example_fputs();
+    example_read_file();
     return 0;
 }
 
@@ -46,10 +48,33 @@ void example_fputc()
 // 通过 fputs 向文件中写入字符串
 void example_fputs()
 {
-     char str[20];
+    char str[20];
     FILE *f1 = fopen("./tmp_data.txt", "a");
     char c1 = fputs("this is a string\n", f1);
     printf("%c\n", c1);
+    fclose(f1);
+}
+
+// 读取文件内容
+void example_read_file()
+{
+    char str[20];
+    char buf[255];
+    int c1 = 0;
+    FILE *f1 = fopen("./tmp_data.txt", "r");
+    // 使用 fgetc 读取文件
+    for (size_t i = 0; i < 5; i++)
+    {
+        c1 = fgetc(f1);
+        printf("the one char is:%c\t", c1);
+    }
+    printf("\n");
+    // 使用 fgets 读取文件。遇到一个换行符 '\n' 或文件的末尾 EOF，则只会返回读取到的字符，包括换行符
+    fgets(buf, 255, f1);
+    printf("fgets get content is:%s\n", buf);
+    // 使用 fscanf 读取文件。遇到空格或换行，则停止读取
+    fscanf(f1, "%s", buf);
+    printf("fscanf get content is:%s\n", buf);
     fclose(f1);
 }
 
@@ -124,6 +149,36 @@ void example_fputs()
 ```
 
 ### 读取文件
+* 与 putc/puts 相对的是读取文件的  fgetc/fgets。
+* `fgetc()` 函数从 fp 所指向的输入文件中读取一个字符。返回值是读取的字符，如果发生错误则返回 EOF。
+* 函数 fgets() 从 fp 所指向的输入流中读取 n - 1 个字符。它会把读取的字符串复制到缓冲区 buf，并在最后追加一个 null 字符来终止字符串。如果这个函数在读取最后一个字符之前就遇到一个换行符 '\n' 或文件的末尾 EOF，则只会返回读取到的字符，包括换行符。
+* 除此之外，也可以使用 `int fscanf(FILE *fp, const char *format, ...)` 函数来从文件中读取字符串，但是在遇到第一个空格和换行符时，它会停止读取。
+* 示例代码如下：
+
+```c
+// 读取文件内容
+void example_read_file()
+{
+    char str[20];
+    char buf[255];
+    int c1 = 0;
+    FILE *f1 = fopen("./tmp_data.txt", "r");
+    // 使用 fgetc 读取文件
+    for (size_t i = 0; i < 5; i++)
+    {
+        c1 = fgetc(f1);
+        printf("the one char is:%c\t", c1);
+    }
+    printf("\n");
+    // 使用 fgets 读取文件。遇到一个换行符 '\n' 或文件的末尾 EOF，则只会返回读取到的字符，包括换行符
+    fgets(buf, 255, f1);
+    printf("fgets get content is:%s\n", buf);
+    // 使用 fscanf 读取文件。遇到空格或换行，则停止读取
+    fscanf(f1, "%s", buf);
+    printf("fscanf get content is:%s\n", buf);
+    fclose(f1);
+}
+```
 
 ### 二进制 I/O 函数
 
