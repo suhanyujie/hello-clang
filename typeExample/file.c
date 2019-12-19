@@ -226,4 +226,7 @@ void example_fread_and_fwrite()
 
 * 需要注意的是，读文件时使用的 mode 为 `r`。而写文件时，使用的是 `w`/`a`。如果用的不对，会出现读不出数据的情况。
 
+## 参考
+* http://c.biancheng.net/view/2071.html
+
 */
