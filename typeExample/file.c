@@ -10,7 +10,7 @@ void example_fopen();
 void example_fputc();
 void example_fputs();
 void example_read_file();
-
+void example_fread_and_fwrite();
 
 int main(int argc, char const *argv[])
 {
@@ -18,7 +18,8 @@ int main(int argc, char const *argv[])
     //example_fopen();
     //example_fputc();
     //example_fputs();
-    example_read_file();
+    //example_read_file();
+    example_fread_and_fwrite();
     return 0;
 }
 
@@ -75,6 +76,21 @@ void example_read_file()
     // 使用 fscanf 读取文件。遇到空格或换行，则停止读取
     fscanf(f1, "%s", buf);
     printf("fscanf get content is:%s\n", buf);
+    fclose(f1);
+}
+
+void example_fread_and_fwrite()
+{
+    char str[20] = "\0";
+    // fread(void *ptr, size_t size_of_elements, size_t number_of_elements, FILE *a_file);
+    FILE *f1 = fopen("./tmp_data.txt", "a");
+    size_t num_write = 0;
+    num_write = fwrite(str, sizeof(char), 8, f1);
+    fclose(f1);
+    
+    f1 = fopen("./tmp_data.txt", "r");
+    size_t num1 = fread(str, sizeof(char), 8, f1);
+    printf("%s\t%zu\t%zu\n", str, num_write, num1);
     fclose(f1);
 }
 
@@ -181,9 +197,33 @@ void example_read_file()
 ```
 
 ### 二进制 I/O 函数
+* c 语言中，这两个函数用于二进制的输入输出：
 
+```c
+size_t fread(void *ptr, size_t size_of_elements, size_t number_of_elements, FILE *a_file);
 
+size_t fwrite(const void *ptr, size_t size_of_elements, size_t number_of_elements, FILE *a_file);
+```
 
+* 通常用于存储块的读写（数组或结构体的读写）。示例如下：
 
+```c
+void example_fread_and_fwrite()
+{
+    char str[20] = "\0";
+    // fread(void *ptr, size_t size_of_elements, size_t number_of_elements, FILE *a_file);
+    FILE *f1 = fopen("./tmp_data.txt", "a");
+    size_t num_write = 0;
+    num_write = fwrite(str, sizeof(char), 8, f1);
+    fclose(f1);
+    
+    f1 = fopen("./tmp_data.txt", "r");
+    size_t num1 = fread(str, sizeof(char), 8, f1);
+    printf("%s\t%zu\t%zu\n", str, num_write, num1);
+    fclose(f1);
+}
+```
+
+* 需要注意的是，读文件时使用的 mode 为 `r`。而写文件时，使用的是 `w`/`a`。如果用的不对，会出现读不出数据的情况。
 
 */
