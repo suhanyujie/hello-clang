@@ -46,4 +46,41 @@ int main(int argc, char const *argv[])
 |`#error` | 当遇到标准错误时，输出错误信息。   | 
 |`#pragma` | 使用标准化方法，发布特殊的命令到编译器中。   | 
 
+### 一些实例
+* 使用 `#define` 定义常量，注意，后面不能有分号：
+
+```
+#define MAX_BUCKET_NUM 20
+```
+
+* 使用 `#include` 包含源码文件。
+* `#include <stdio.h>` 表示从系统库中获取 stdio.h。
+* `#include "myheader.h"` 表示从本地目录中获取 myheader.h。
+* 取消，并重新定义宏：
+
+```
+#undef MAX_BUCKET_NUM
+#define MAX_BUCKET_NUM 10
+```
+
+* 先判断，在进行一些操作：
+
+```c
+// 如果已经定义 MESSAGE，则重新定义 MESSAGE 为 "you wish!"
+#ifndef MESSAGE
+    #define MESSAGE "you wish!"
+#endif
+```
+
+### 系统预定义宏
+* c 语言中，已经预定义了很多宏，在编写代码时，可以使用它们。需要注意的是，不能直接修改这些预定义的宏。
+
+|预定义宏|描述|
+|:-----  |:-----  |
+|`__DATE__` |当前日期，以 "MMM DD YYYY" 格式表示的字符常量。   | 
+|`__TIME__` |当前日期，以 "HH:MM:SS" 格式表示的字符常量。   | 
+|`__FILE__` |当前的文件名称   | 
+|`__LINE__` |当前所处的文件的行号   | 
+|`__STDC__` |当编译器以 ANSI 标准编译时，则定义为 1。   | 
+
 */
