@@ -6,11 +6,13 @@
  | 函数声明区
  -----------------
 */
-
+void example_for_system_defined();
 
 int main(int argc, char const *argv[])
 {
     printf("initial print:hello world!\n");
+    example_for_system_defined();
+
     return 0;
 }
 
@@ -19,7 +21,15 @@ int main(int argc, char const *argv[])
  | 函数实现区
  -----------------
 */
-
+// c标准库自带的宏定义使用
+void example_for_system_defined()
+{
+    printf("__FILE__: %s\n", __FILE__);
+    printf("__LINE__: %d\n", __LINE__);
+    printf("__DATE__: %s\n", __DATE__);
+    printf("__TIME__: %s\n", __TIME__);
+    printf("__STDC__: %d\n", __STDC__);
+}
 
 /*
  -----------------
@@ -82,5 +92,23 @@ int main(int argc, char const *argv[])
 |`__FILE__` |当前的文件名称   | 
 |`__LINE__` |当前所处的文件的行号   | 
 |`__STDC__` |当编译器以 ANSI 标准编译时，则定义为 1。   | 
+
+* 示例如下：
+
+```c
+// c标准库自带的宏定义使用
+void example_for_system_defined()
+{
+    printf("__FILE__: %s\n", __FILE__);
+    printf("__LINE__: %d\n", __LINE__);
+    printf("__DATE__: %s\n", __DATE__);
+    printf("__TIME__: %s\n", __TIME__);
+    printf("__STDC__: %d\n", __STDC__);
+}
+```
+
+## 预处理器运算符
+### 宏延续运算符
+
 
 */
