@@ -7,11 +7,13 @@
  -----------------
 */
 void example_for_system_defined();
+void example_for_string_constant();
 
 int main(int argc, char const *argv[])
 {
     printf("initial print:hello world!\n");
-    example_for_system_defined();
+    //example_for_system_defined();
+    example_for_string_constant();
 
     return 0;
 }
@@ -29,6 +31,13 @@ void example_for_system_defined()
     printf("__DATE__: %s\n", __DATE__);
     printf("__TIME__: %s\n", __TIME__);
     printf("__STDC__: %d\n", __STDC__);
+}
+
+#define message_for(a, b) \
+    printf(#a " and " #b ": we love you!\n");
+void example_for_string_constant()
+{
+    message_for(Nancy, Tomy);
 }
 
 /*
@@ -108,7 +117,27 @@ void example_for_system_defined()
 ```
 
 ## 预处理器运算符
-### 宏延续运算符
+### 宏延续运算符 `\`
+* 当一个比较长的宏定义写在一行上时，会显得冗长，难以阅读，此时可以通过宏延续运算符（\）进行拼接，使之可以多行显示。如下所示：
+
+```c
+#define message_for(a, b) \
+    printf(#a " and " #b": we love you!\n")
+```
+
+### 字符串常量化运算符 `#`
+* 当需要把一个宏的参数转为字符串常量时，使用字符串常量化运算符 `#`。在宏中使用的该运算符有一个特定的参数或参数列表：
+
+```c
+#define message_for(a, b) \
+    printf(#a " and " #b ": we love you!\n");
+void example_for_string_constant()
+{
+    message_for(Nancy, Tomy);
+}
+```
+
+
 
 
 */
