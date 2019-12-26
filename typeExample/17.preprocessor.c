@@ -8,12 +8,14 @@
 */
 void example_for_system_defined();
 void example_for_string_constant();
+void example_for_flag_concat();
 
 int main(int argc, char const *argv[])
 {
     printf("initial print:hello world!\n");
     //example_for_system_defined();
-    example_for_string_constant();
+    //example_for_string_constant();
+    example_for_flag_concat();
 
     return 0;
 }
@@ -38,6 +40,14 @@ void example_for_system_defined()
 void example_for_string_constant()
 {
     message_for(Nancy, Tomy);
+}
+
+// 宏标记连接运算符
+#define tokenparser(n) printf("token" #n "=%d\n", token##n)
+void example_for_flag_concat()
+{
+    int token34 = 31;
+    tokenparser(34);
 }
 
 /*
@@ -137,7 +147,18 @@ void example_for_string_constant()
 }
 ```
 
+### 标记粘贴运算符 `##`
+* 宏定义中的标记粘贴运算符会合并两个参数。它允许在宏定义中两个独立的标记被合并为一个标记。例如：
 
+```c
+#define tokenparser(n) printf("token" #n "=%d\n", token##n)
+void example_for_flag_concat()
+{
+    int token34 = 31;
+    tokenparser(34);
+}
+```
 
+* 宏定义中 `"token" #n ` 表示字符串常量化为 `token34`。`token##n` 预处理后成为 `token34`
 
 */
