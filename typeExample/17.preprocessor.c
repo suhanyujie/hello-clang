@@ -9,13 +9,16 @@
 void example_for_system_defined();
 void example_for_string_constant();
 void example_for_flag_concat();
+void example_for_is_defined();
+void example_for_func();
 
 int main(int argc, char const *argv[])
 {
     printf("initial print:hello world!\n");
     //example_for_system_defined();
     //example_for_string_constant();
-    example_for_flag_concat();
+    //example_for_flag_concat();
+    example_for_is_defined();
 
     return 0;
 }
@@ -49,6 +52,17 @@ void example_for_flag_concat()
     int token34 = 31;
     tokenparser(34);
 }
+
+// 判断宏是否已定义
+#if !defined(ERR_MESSAGE)
+    #define ERR_MESSAGE "there is some error...\n"
+#endif
+void example_for_is_defined()
+{
+    printf("%s\n", ERR_MESSAGE);
+}
+
+// 参数化的宏
 
 /*
  -----------------
@@ -160,5 +174,27 @@ void example_for_flag_concat()
 ```
 
 * 宏定义中 `"token" #n ` 表示字符串常量化为 `token34`。`token##n` 预处理后成为 `token34`
+
+### `defined()` 运算符
+* 预处理器 defined 运算符用在常量表达式中，用来确定一个标识符是否已经使用 define 定义过。如果指定的标识符已定义，则值为真。如果未定义，则值为假。
+* 示例代码如下：
+
+```c
+// 判断宏是否已定义
+#if !defined(ERR_MESSAGE)
+    #define ERR_MESSAGE "there is some error...\n"
+#endif
+void example_for_is_defined()
+{
+    printf("%s\n", ERR_MESSAGE);
+}
+```
+
+## 参数化的宏
+* 在一段时间以前，我一直以为宏定义只是做一个简单的字符串替换，却没想到，宏定义中，可以有参数。
+* 事实上，预处理器（CPP）是可以使用参数化的宏来模拟函数，示例如下：
+
+```c
+```
 
 */
