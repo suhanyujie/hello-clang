@@ -18,7 +18,8 @@ int main(int argc, char const *argv[])
     //example_for_system_defined();
     //example_for_string_constant();
     //example_for_flag_concat();
-    example_for_is_defined();
+    //example_for_is_defined();
+    example_for_func();
 
     return 0;
 }
@@ -63,6 +64,12 @@ void example_for_is_defined()
 }
 
 // 参数化的宏
+#define MAX(x, y) ((x) > (y)) ? (x) : (y)
+void example_for_func() 
+{
+    printf("the max number is %d\n",  MAX(11,12));
+    printf("the max number is %d\n",  MAX(129,98));
+}
 
 /*
  -----------------
@@ -195,6 +202,13 @@ void example_for_is_defined()
 * 事实上，预处理器（CPP）是可以使用参数化的宏来模拟函数，示例如下：
 
 ```c
+// 参数化的宏
+#define MAX(x, y) ((x) > (y)) ? (x) : (y)
+void example_for_func() 
+{
+    printf("the max number is %d\n",  MAX(11,12));
+    printf("the max number is %d\n",  MAX(129,98));
+}
 ```
 
 */
