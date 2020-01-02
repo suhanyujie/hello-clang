@@ -67,8 +67,17 @@ void example_for_include_once()
 #endif
 ```
 
+### 有条件引用
+* 又是需要从多个不同的头文件中选择一个引用到程序中。例如，需要指定在不同的操作系统上使用的配置参数。此时可以通过一系列的条件判断来实现：
 
+```
+#if SYSTEM_1
+    #include "system_1.h"
+#elif SYSTEM_2
+    #include "system_2.h"
+    ...
+#endif
+```
 
-
-
+* 但是如果头文件比较多的时候，这么做是很不妥当的.
 */
