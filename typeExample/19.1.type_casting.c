@@ -8,12 +8,14 @@
 */
 void example_for_simple_transfer();
 void example_for_integer_imporve_transfer();
+void example_for_arithmetic_transfer();
 
 int main(int argc, char const *argv[])
 {
     printf("initial print:hello world!\n");
     //example_for_simple_transfer();
-    example_for_integer_imporve_transfer();
+    //example_for_integer_imporve_transfer();
+    example_for_arithmetic_transfer();
 
     return 0;
 }
@@ -39,6 +41,15 @@ void example_for_integer_imporve_transfer()
     int sum = 0;
     sum = i + c;
     printf("the result is :%d\n", sum);
+}
+
+void example_for_arithmetic_transfer()
+{
+    int i = 20;
+    char c = 'c';// c 字符的 ASCII 值是 `99`
+    float sum;
+    sum = i + c;
+    printf("the result is:%.3f\n", sum);
 }
 
 /*
@@ -89,6 +100,25 @@ void example_for_integer_imporve_transfer()
 * 运行后，得出的结果值是：116。可见，char 类型的变量 `c` 被提升为 int 类型（对应的 ASCII 值）。
 
 ### 常用的算术转换
+* 算术转换是指在算术运算过程中隐式的把值强制转换为另一个类型。编译器首先执行整数提升，如果操作数类型不同，则它们会被转换为下列层次中出现的最高层次的类型：
 
+```
+long double <- double <- float <- unsigned long long <- long long <- unsigned long <- long <- unsgined int <- int 
+```
+
+* 常用的算术转换不适用于赋值运算符、逻辑运算符 —— `&&` 和 `||`。换句话说，就是当执行赋值语句、运算 `&&` 或 `||` 的语句中不会发生隐式转换。
+
+```c
+void example_for_arithmetic_transfer()
+{
+    int i = 20;
+    char c = 'c';// c 字符的 ASCII 值是 `99`
+    float sum;
+    sum = i + c;
+    printf("the result is:%.3f\n", sum);
+}
+```
+
+* 相加得到的值是 `119.000`。代码中，c 先被转换为整数，但由于 sum 的类型是 float，所以会应用常用的算术转换，编译器把 i 和 c 转换为 float，并把它们相加得到一个 float 类型的结果值。
 
 */
