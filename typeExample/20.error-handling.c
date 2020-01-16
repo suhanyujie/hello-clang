@@ -11,13 +11,16 @@ extern int errno;
 */
 void example_for_simple_error();
 void example_for_error_with_division_by_0();
+void example_for_exit_success();
+void example_for_exit_error();
 
 
 int main(int argc, char const *argv[])
 {
     printf("initial print:hello world!\n");
     //example_for_simple_error();
-    example_for_error_with_division_by_0();
+    //example_for_error_with_division_by_0();
+    example_for_exit_success();
     return 0;
 }
 
@@ -55,6 +58,20 @@ void example_for_error_with_division_by_0()
     quotient = dividend / divisor;
     fprintf(stderr, "quotient 变量的值为：%d\n", quotient);
 }
+
+void example_for_exit_success()
+{
+    int is_error = 1;
+    if (is_error > 0)
+    {
+        printf("exit for success\n");
+        exit(EXIT_SUCCESS);
+    } else {
+        printf("exit for failure\n");
+        exit(EXIT_FAILURE);
+    }
+}
+
 
 /*
  -----------------
@@ -104,6 +121,10 @@ void example_for_error_with_division_by_0()
     fprintf(stderr, "quotient 变量的值为：%d\n", quotient);
 }
 ```
+
+### 程序退出状态
+* c 语言中，程序成功执行完一个操作正常退出时，会带有值 `EXIT_SUCCESS`。它是 c 语言中的宏，值为 `0`。
+* 有正常退出，就有异常退出，异常退出时的状态宏是 `EXIT_FAILURE`，值为 `-1`。
 
 
 
