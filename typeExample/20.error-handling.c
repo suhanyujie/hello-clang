@@ -12,7 +12,6 @@ extern int errno;
 void example_for_simple_error();
 void example_for_error_with_division_by_0();
 void example_for_exit_success();
-void example_for_exit_error();
 
 
 int main(int argc, char const *argv[])
@@ -64,11 +63,11 @@ void example_for_exit_success()
     int is_error = 1;
     if (is_error > 0)
     {
-        printf("exit for success\n");
-        exit(EXIT_SUCCESS);
-    } else {
         printf("exit for failure\n");
         exit(EXIT_FAILURE);
+    } else {
+        printf("exit for success\n");
+        exit(EXIT_SUCCESS);
     }
 }
 
